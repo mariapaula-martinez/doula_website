@@ -1,0 +1,749 @@
+    <!-- Ensure no white space between sections -->
+    <style>
+        .full-width-banner + .beige-bg-section {
+            margin-top: 0;
+            padding-top: 80px;
+        }
+    </style><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Paula Martinez - Psicóloga y Doula</title>
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: rgb(124, 81, 137); /* Updated purple color */
+            --accent-color: rgb(124, 81, 137); /* Updated purple for buttons */
+            --light-bg: #FFFFFF; /* White background */
+            --text-color: #333333; /* Main text color */
+            --beige-bg: rgb(216, 207, 190); /* Beige background for specific sections */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        /* Makes sections full width */
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            padding: 40px 0; /* Taller navbar */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 35px; /* More space between nav items */
+            font-size: 16px; /* Back to original font size */
+            position: relative;
+        }
+        
+        nav a:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 10%; /* Start higher */
+            height: 80%; /* Taller separator lines */
+            width: 1px; /* Thin lines */
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 600px;
+        }
+        
+        .full-width-banner {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 0; /* Remove top margin */
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .banner-cta {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
+        }
+        
+        /* Beige background sections */
+        .beige-bg-section {
+            background-color: var(--beige-bg);
+            width: 100%;
+            padding: 80px 20px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            background-image: url('images/header.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 80px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .brand-name {
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+        
+        .brand-tagline {
+            font-size: 1rem;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+        
+        .intro-heading {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .intro-text {
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--primary-dark);
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px; /* Rounded button style as per the image */
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .cta-button:hover {
+            background-color: rgb(104, 67, 115); /* Slightly darker purple on hover */
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section.beige-bg-section {
+            max-width: 100%;
+            padding: 80px 0;
+        }
+        
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        /* Services Section */
+        .service {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+        
+        .service:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .service-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: #f0f0f0;
+            background-image: url('images/service1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 50px;
+        }
+        
+        .service-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .service-description {
+            margin-bottom: 30px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .testimonial {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .testimonial-image {
+            width: 100%;
+            height: 250px;
+            background-image: url('images/testimonial.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .video-testimonial {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-image: url('images/video.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-button::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-left: 15px solid var(--primary-dark);
+            border-bottom: 10px solid transparent;
+            margin-left: 5px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background-color: #f5f5f5;
+            padding: 80px 20px;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 50px;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Map */
+        .map-container {
+            height: 300px;
+            margin-top: 40px;
+            background-color: #eee;
+            background-image: url('images/map.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-social {
+            display: flex;
+            margin: 20px 0;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content,
+            .service-content {
+                padding: 40px 20px;
+            }
+            
+            .service, 
+            .service:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .service-image {
+                height: 300px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                padding: 0 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#home" onclick="scrollToSection('home'); return false;">Inicio</a>
+            <a href="#about" onclick="scrollToSection('about'); return false;">Sobre mí</a>
+            <a href="#services" onclick="scrollToSection('services'); return false;">Servicios</a>
+            <a href="#approach" onclick="scrollToSection('approach'); return false;">Mi enfoque</a>
+            <a href="#testimonials" onclick="scrollToSection('testimonials'); return false;">Testimonios</a>
+            <a href="#contact" onclick="scrollToSection('contact'); return false;">Contacto</a>
+        </nav>
+    </header>
+    
+    <!-- Full-width Banner Image -->
+    <div class="full-width-banner no-margin" style="background-color: rgb(124, 81, 137); padding-top: 110px;">
+        <div style="max-width: 800px; margin: 0 auto; position: relative;">
+            <img src="images/header.jpg" alt="Banner Image" style="width: 100%; height: auto; object-fit: cover; max-height: 600px; display: block;">
+            <!-- Button removed -->
+        </div>
+    </div>
+
+    <!-- Hero Section with beige background -->
+    <section id="home" class="hero beige-bg-section no-margin">
+        <div class="section-content">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; max-width: 1200px; margin: 0 auto;">
+                <div style="flex: 1; min-width: 300px; height: 400px; padding-right: 200px;">
+                    <img src="images/hero.png" alt="Maria Paula Martinez" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="hero-content" style="flex: 1; min-width: 300px; padding: 40px 0 40px 100px;">
+                    <h2 class="intro-heading">¡Hola! Soy Maria Paula Martinez</h2>
+                    <p class="intro-text">Psicóloga especializada en salud maternal y doula certificada. Mi misión es ofrecer apoyo holístico para que vivas tu embarazo, parto y maternidad con confianza, tranquilidad y plenitud.</p>
+                    
+                    <p class="quote">"Te acompaño a conectar con tu intuición y fortaleza para vivir esta experiencia transformadora de la forma más consciente y empoderada posible."</p>
+                    
+                    <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">¡Contáctame ahora!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">Sobre mí</h2>
+        
+        <div class="service">
+            <div class="service-image"></div>
+            <div class="service-content">
+                <p class="service-description">Como psicóloga y doula, he dedicado mi carrera profesional a apoyar a mujeres y familias durante el embarazo, parto y posparto. Mi formación académica en psicología se complementa con una capacitación especializada en atención perinatal y acompañamiento de parto.</p>
+                <p class="service-description">Mi enfoque integra conocimientos científicos actualizados con prácticas que honran la sabiduría ancestral del cuerpo femenino, creando un puente entre la evidencia científica y el respeto por los procesos naturales.</p>
+                <p class="service-description">Cada mujer y familia que acompaño me enseña algo nuevo, enriqueciendo mi práctica y recordándome la importancia de un acompañamiento personalizado y respetuoso.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">Servicios</h2>
+        <p class="section-intro">Trabajo desde un enfoque integral, respetando la individualidad de cada mujer y familia, ofreciendo herramientas personalizadas para una experiencia consciente y positiva.</p>
+        
+        <div class="service">
+            <div class="service-image"></div>
+            <div class="service-content">
+                <h3 class="service-title">Acompañamiento Prenatal</h3>
+                <p class="service-description">Un espacio para prepararte emocionalmente para el parto y la maternidad, abordando miedos, expectativas y creando un plan de parto que refleje tus deseos y necesidades.</p>
+                <p class="service-description">Cada sesión se adapta a tu momento específico del embarazo, ofreciendo recursos prácticos y emocionales para una experiencia consciente y positiva.</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">¡Contáctame ahora!</a>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="service-image" style="background-image: url('images/service2.jpg');"></div>
+            <div class="service-content">
+                <h3 class="service-title">Doula de Parto</h3>
+                <p class="service-description">Te acompaño durante todo el proceso de parto, ofreciendo apoyo continuo físico y emocional, ayudándote a comunicar tus necesidades al equipo médico y facilitando un ambiente seguro y tranquilo.</p>
+                <p class="service-description">Mi presencia como doula complementa el trabajo del equipo médico, centrándome en tu bienestar emocional y en que te sientas apoyada en cada momento del proceso.</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">¡Contáctame ahora!</a>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="service-image" style="background-image: url('images/service3.jpg');"></div>
+            <div class="service-content">
+                <h3 class="service-title">Terapia Psicológica Perinatal</h3>
+                <p class="service-description">Espacio terapéutico especializado para abordar la ansiedad prenatal, depresión postparto, duelo perinatal, dificultades en la lactancia y adaptación a la maternidad.</p>
+                <p class="service-description">Utilizo un enfoque integrador que incluye técnicas cognitivo-conductuales, mindfulness y terapia centrada en emociones, adaptadas a las necesidades específicas de la etapa maternal.</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">¡Contáctame ahora!</a>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="service-image" style="background-image: url('images/service4.jpg');"></div>
+            <div class="service-content">
+                <h3 class="service-title">Grupos de Apoyo</h3>
+                <p class="service-description">Facilitadora de grupos de embarazo consciente y círculos de madres donde compartir experiencias, aprendizajes y crear una red de apoyo en un entorno seguro y empático.</p>
+                <p class="service-description">Estos espacios colectivos fomentan la conexión entre mujeres que están viviendo procesos similares, normalizando emociones y enriqueciendo la experiencia maternal a través del apoyo mutuo.</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">Agenda tu consulta</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Approach Section -->
+    <section id="approach">
+        <h2 class="section-title">Mi Enfoque</h2>
+        
+        <div class="service">
+            <div class="service-content" style="flex: 2; max-width: 800px; margin: 0 auto; text-align: center;">
+                <p class="service-description">Mi trabajo se basa en tres pilares fundamentales que guían cada interacción y servicio que ofrezco:</p>
+            </div>
+        </div>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 40px;">
+            <div style="flex: 1; min-width: 300px; padding: 20px; text-align: center;">
+                <h3 class="service-title">Respeto</h3>
+                <p>Honro tus decisiones, tu historia, tus tiempos y tu sabiduría interna. Cada acompañamiento se basa en un profundo respeto por tu autonomía y tus elecciones informadas.</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 300px; padding: 20px; text-align: center;">
+                <h3 class="service-title">Integración</h3>
+                <p>Combino conocimientos científicos actualizados con prácticas que reconocen la sabiduría ancestral del cuerpo femenino, integrando mente, cuerpo y emociones.</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 300px; padding: 20px; text-align: center;">
+                <h3 class="service-title">Empoderamiento</h3>
+                <p>Te acompaño a conectar con tus recursos internos y a desarrollar nuevas herramientas para que vivas esta etapa desde tu poder personal y tu confianza.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2 class="section-title">Testimonios</h2>
+        
+        <div class="video-testimonial" style="background-image: url('images/video-testimonial.jpg');">
+            <div class="play-button"></div>
+        </div>
+        
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="testimonial-image" style="background-image: url('images/testimonial1.jpg');"></div>
+                <p class="testimonial-quote">"Contar con Maria Paula como doula y psicóloga fue la mejor decisión. Su presencia calmada y sus herramientas me ayudaron a tener un parto consciente y empoderado a pesar de las complicaciones."</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">Agenda tu consulta</a>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-image" style="background-image: url('images/testimonial2.jpg');"></div>
+                <p class="testimonial-quote">"Las sesiones de terapia perinatal me salvaron durante mi depresión postparto. Maria Paula me ayudó a encontrar luz en esos momentos oscuros y a reconciliarme con mi maternidad."</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">Agenda tu consulta</a>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-image" style="background-image: url('images/testimonial3.jpg');"></div>
+                <p class="testimonial-quote">"El grupo de apoyo que facilita Maria Paula se ha convertido en mi tribu. Gracias a ese espacio seguro pude expresar mis miedos y dudas, sintiéndome comprendida y acompañada."</p>
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">Agenda tu consulta</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section with beige background -->
+    <section id="contact" class="contact-section beige-bg-section">
+        <h2 class="section-title">Contacto</h2>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <p>Medellín - Colombia</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-icon">📱</div>
+                    <p>(+57) 3042572298</p>
+                </div>
+
+                <!-- Add more space after phone number -->
+                <div style="margin-bottom: 80px;"></div>
+                
+                <div class="contact-social">
+                    <a href="https://www.instagram.com/mariapaula.psicologadoula" target="_blank" class="social-icon" style="margin-bottom: 20px; width: 50px; height: 50px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="rgb(124, 81, 137)">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://www.facebook.com/maria.p.baquero.1" target="_blank" class="social-icon" style="margin-bottom: 20px; width: 50px; height: 50px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="rgb(124, 81, 137)">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://wa.me/573042572239" target="_blank" class="social-icon" style="margin-bottom: 20px; width: 50px; height: 50px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="rgb(124, 81, 137)">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <a href="#contact" class="cta-button" onclick="scrollToSection('contact'); return false;">Agenda tu consulta</a>
+            </div>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nombre *</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Teléfono *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico *</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mensaje *</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="cta-button">Enviar</button>
+            </div>
+        </div>
+
+        <div style="max-width: 1500px; margin: 0 auto; padding: 0 20px;">
+            <!-- Separator line -->
+            <div style="width: 100%; height: 1px; background-color: #D3D3D3; margin: 40px 0;"></div>
+            
+            <!-- Map container -->
+            <div class="map-container" style="height: 400px; background-image: url('images/map.jpg'); background-size: cover; background-position: center;">
+                <!-- Map content here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons" style="margin: 40px 0;">
+            <a href="https://www.instagram.com/mariapaula.psicologadoula" target="_blank" class="social-icon" style="width: 80px; height: 80px; margin: 0 15px; display: inline-flex; justify-content: center; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="rgb(124, 81, 137)">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/maria.p.baquero.1" target="_blank" class="social-icon" style="width: 80px; height: 80px; margin: 0 15px; display: inline-flex; justify-content: center; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="rgb(124, 81, 137)">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                </svg>
+            </a>
+            <a href="https://wa.me/573042572239" target="_blank" class="social-icon" style="width: 80px; height: 80px; margin: 0 15px; display: inline-flex; justify-content: center; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="rgb(124, 81, 137)">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling function for navigation
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                // Calculate header height to adjust scroll position
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Add "About" section that was missing in the template
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure all links work with smooth scrolling
+            const allLinks = document.querySelectorAll('a[href^="#"]');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        scrollToSection(targetId);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
