@@ -523,6 +523,29 @@
                 margin-top: 120px;
             }
 
+            /* Add these styles for better mobile navigation */
+            header {
+                background-color: var(--primary-color) !important;
+            }
+            
+            nav {
+                background-color: var(--primary-color) !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            nav a {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 15px 0;
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .full-width-banner {
+                margin-top: 60px;
+            }
+
         }
     </style>
 </head>
@@ -814,139 +837,71 @@
                     }
                 });
             });
-    
-            // Mobile navigation handling
+            
+            // Mobile menu implementation
             const header = document.querySelector('header');
             const nav = document.querySelector('nav');
-    
-            // First, fix the header's positioning
-            header.style.position = 'fixed';
-            header.style.top = '0';
-            header.style.width = '100%';
-            header.style.zIndex = '1000';
-    
-            // Create mobile menu toggle button
-            const menuToggle = document.createElement('button');
-            menuToggle.className = 'menu-toggle';
-            menuToggle.innerHTML = '☰';
-            menuToggle.style.display = 'none';
-            menuToggle.style.position = 'absolute';
-            menuToggle.style.top = '20px';
-            menuToggle.style.right = '20px';
-            menuToggle.style.color = 'white';
-            menuToggle.style.fontSize = '24px';
-            menuToggle.style.cursor = 'pointer';
-            menuToggle.style.zIndex = '1001';
-            menuToggle.style.background = 'none';
-            menuToggle.style.border = 'none';
             
-            // Append toggle button
-            header.appendChild(menuToggle);
+            // Create hamburger button with styles applied directly
+            const hamburger = document.createElement('button');
+            hamburger.innerHTML = '☰';
+            hamburger.style.background = 'none';
+            hamburger.style.border = 'none';
+            hamburger.style.color = 'white';
+            hamburger.style.fontSize = '24px';
+            hamburger.style.position = 'absolute';
+            hamburger.style.right = '20px';
+            hamburger.style.top = '15px';
+            hamburger.style.cursor = 'pointer';
+            hamburger.style.display = 'none';
+            hamburger.style.zIndex = '1001';
             
-            // Create mobile menu
-            const mobileMenu = document.createElement('div');
-            mobileMenu.className = 'mobile-menu';
-            mobileMenu.style.display = 'none';
-            mobileMenu.style.width = '100%';
-            mobileMenu.style.backgroundColor = 'rgb(124, 81, 137)';
-            mobileMenu.style.position = 'absolute';
-            mobileMenu.style.top = '100%';
-            mobileMenu.style.left = '0';
+            header.appendChild(hamburger);
             
-            // Clone nav items for mobile menu
-            const mobileNav = nav.cloneNode(true);
-            mobileNav.style.display = 'flex';
-            mobileNav.style.flexDirection = 'column';
-            mobileNav.style.width = '100%';
-            mobileNav.style.padding = '0';
-            mobileNav.style.margin = '0';
+            // Initial check and event listener for window size
+            function checkWindowSize() {
+                if (window.innerWidth <= 768) {
+                    nav.style.display = 'none';
+                    hamburger.style.display = 'block';
+                } else {
+                    nav.style.display = 'flex';
+                    hamburger.style.display = 'none';
+                }
+            }
             
-            // Style mobile menu links
-            const mobileLinks = mobileNav.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.style.display = 'block';
-                link.style.width = '100%';
-                link.style.padding = '15px 0';
-                link.style.textAlign = 'center';
-                link.style.borderBottom = '1px solid rgba(255,255,255,0.2)';
-                
-                // Remove separator
-                link.style.position = 'relative';
-                
-                // Remove after pseudo-element
+            // Handle hamburger click
+            hamburger.addEventListener('click', function() {
+                if (nav.style.display === 'none' || nav.style.display === '') {
+                    nav.style.display = 'flex';
+                    nav.style.flexDirection = 'column';
+                    nav.style.position = 'absolute';
+                    nav.style.width = '100%';
+                    nav.style.left = '0';
+                    nav.style.top = '100%';
+                    nav.style.backgroundColor = 'rgb(124, 81, 137)';
+                } else {
+                    nav.style.display = 'none';
+                }
+            });
+            
+            // Hide mobile menu when clicking a link
+            nav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', function() {
                     if (window.innerWidth <= 768) {
-                        mobileMenu.style.display = 'none';
+                        nav.style.display = 'none';
                     }
                 });
             });
             
-            // Append mobile menu
-            mobileMenu.appendChild(mobileNav);
-            header.appendChild(mobileMenu);
-            
-            // Toggle menu on click
-            menuToggle.addEventListener('click', function() {
-                if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
-                    mobileMenu.style.display = 'block';
-                } else {
-                    mobileMenu.style.display = 'none';
-                }
-            });
-            
-            // Handle resize
-            function handleResize() {
-                if (window.innerWidth <= 768) {
-                    nav.style.display = 'none';
-                    menuToggle.style.display = 'block';
-                    
-                    // Ensure proper link styling in mobile menu
-                    mobileLinks.forEach(link => {
-                        link.style.after = 'none';
-                    });
-                } else {
-                    nav.style.display = 'flex';
-                    menuToggle.style.display = 'none';
-                    mobileMenu.style.display = 'none';
-                }
-            }
-            
             // Initial check and resize listener
-            handleResize();
-            window.addEventListener('resize', handleResize);
+            checkWindowSize();
+            window.addEventListener('resize', checkWindowSize);
             
-            // Fix for pseudo elements
-            const style = document.createElement('style');
-            style.textContent = `
-                @media (max-width: 768px) {
-                    nav a:not(:last-child)::after {
-                        display: none !important;
-                    }
-                    
-                    .mobile-menu nav {
-                        flex-direction: column;
-                        width: 100%;
-                    }
-                    
-                    .mobile-menu nav a {
-                        display: block;
-                        width: 100%;
-                        padding: 15px 0;
-                        text-align: center;
-                        border-bottom: 1px solid rgba(255,255,255,0.2);
-                    }
-                    
-                    /* Ensure no white space */
-                    header {
-                        padding-bottom: 0 !important;
-                    }
-                    
-                    .mobile-menu {
-                        margin-top: 0 !important;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
+            // Fix banner top margin for fixed header
+            const banner = document.querySelector('.full-width-banner');
+            if (banner) {
+                banner.style.marginTop = header.offsetHeight + 'px';
+            }
         });
     </script>
 
