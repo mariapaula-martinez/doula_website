@@ -523,30 +523,6 @@
                 margin-top: 120px;
             }
 
-            /* Add these styles for the hamburger menu */
-            header {
-                padding: 20px 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav {
-                margin: 0;
-                padding: 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .menu-toggle {
-                align-self: flex-end;
-                margin-right: 20px;
-            }
-
-            /* Ensure the dropdown is connected to the header */
-            header.menu-open {
-                padding-bottom: 0;
-            }
-
         }
     </style>
 </head>
@@ -842,76 +818,90 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-        // Add mobile navigation toggle
+            // Create a container for mobile navigation
+            const mobileNavContainer = document.createElement('div');
+            mobileNavContainer.className = 'mobile-nav-container';
+            mobileNavContainer.style.display = 'none';
+            mobileNavContainer.style.backgroundColor = 'rgb(124, 81, 137)'; // Match exact color
+            mobileNavContainer.style.width = '100%';
+            mobileNavContainer.style.position = 'absolute';
+            mobileNavContainer.style.top = '100%';
+            mobileNavContainer.style.left = '0';
+            mobileNavContainer.style.zIndex = '999';
+            
+            // Create hamburger button
+            const hamburgerBtn = document.createElement('button');
+            hamburgerBtn.innerHTML = '☰';
+            hamburgerBtn.style.background = 'none';
+            hamburgerBtn.style.border = 'none';
+            hamburgerBtn.style.color = 'white';
+            hamburgerBtn.style.fontSize = '24px';
+            hamburgerBtn.style.position = 'absolute';
+            hamburgerBtn.style.right = '20px';
+            hamburgerBtn.style.top = '20px';
+            hamburgerBtn.style.cursor = 'pointer';
+            hamburgerBtn.style.display = 'none';
+            
+            // Get header and navigation
             const header = document.querySelector('header');
             const nav = document.querySelector('nav');
+            const navClone = nav.cloneNode(true);
             
-            // Create mobile menu toggle button
-            const menuToggle = document.createElement('div');
-            menuToggle.className = 'menu-toggle';
-            menuToggle.innerHTML = '☰';
-            menuToggle.style.display = 'none';
-            menuToggle.style.position = 'absolute';
-            menuToggle.style.top = '20px';
-            menuToggle.style.right = '20px';
-            menuToggle.style.color = 'white';
-            menuToggle.style.fontSize = '24px';
-            menuToggle.style.cursor = 'pointer';
-            menuToggle.style.zIndex = '1001';
+            // Add elements to DOM
+            header.style.position = 'relative'; // Ensure positioning context
+            header.appendChild(hamburgerBtn);
+            mobileNavContainer.appendChild(navClone);
+            header.appendChild(mobileNavContainer);
             
-            header.appendChild(menuToggle);
-            
-            // Function to check window width and adjust navigation
-            function checkWidth() {
-                if (window.innerWidth <= 768) {
-                    menuToggle.style.display = 'block';
-                    nav.style.display = 'none';
-                    nav.style.flexDirection = 'column';
-                    nav.style.position = 'absolute';
-                    nav.style.top = '100%'; // Change from fixed pixel value to percentage
-                    nav.style.left = '0';
-                    nav.style.width = '100%';
-                    nav.style.backgroundColor = 'var(--primary-color)';
-                    nav.style.padding = '0'; // Remove padding
-                    nav.style.margin = '0'; // Remove margin
-                    nav.style.zIndex = '1000';
-                    nav.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            // Handle click events
+            hamburgerBtn.addEventListener('click', function() {
+                if (mobileNavContainer.style.display === 'none') {
+                    mobileNavContainer.style.display = 'block';
                 } else {
-                    menuToggle.style.display = 'none';
-                    nav.style.display = 'flex';
-                    nav.style.flexDirection = 'row';
-                    nav.style.position = 'static';
-                    nav.style.width = 'auto';
-                    nav.style.boxShadow = 'none';
-                }
-            }
-
-            // Toggle menu on click
-            menuToggle.addEventListener('click', function() {
-                if (nav.style.display === 'none' || nav.style.display === '') {
-                    nav.style.display = 'flex';
-                    header.classList.add('menu-open');
-                } else {
-                    nav.style.display = 'none';
-                    header.classList.remove('menu-open');
+                    mobileNavContainer.style.display = 'none';
                 }
             });
-
-            // Close menu when a link is clicked
-            const navLinks = nav.querySelectorAll('a');
-            navLinks.forEach(link => {
+            
+            // Add click handlers to mobile nav links
+            const mobileNavLinks = mobileNavContainer.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
                 link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        nav.style.display = 'none';
-                    }
+                    mobileNavContainer.style.display = 'none';
                 });
             });
-
-            // Initial check
-            checkWidth();
-
-            // Check on resize
-            window.addEventListener('resize', checkWidth);
+            
+            // Style mobile navigation links
+            const styleLinks = function() {
+                if (window.innerWidth <= 768) {
+                    hamburgerBtn.style.display = 'block';
+                    nav.style.display = 'none';
+                    
+                    const links = mobileNavContainer.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.style.display = 'block';
+                        link.style.padding = '15px 20px';
+                        link.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+                        link.style.width = '100%';
+                        link.style.textAlign = 'center';
+                    });
+                    
+                    // Remove separators in mobile view
+                    const separators = mobileNavContainer.querySelectorAll('a::after');
+                    separators.forEach(sep => {
+                        sep.style.display = 'none';
+                    });
+                } else {
+                    hamburgerBtn.style.display = 'none';
+                    nav.style.display = 'flex';
+                    mobileNavContainer.style.display = 'none';
+                }
+            };
+            
+            // Initial styling
+            styleLinks();
+            
+            // Update on resize
+            window.addEventListener('resize', styleLinks);
         });
     </script>
 </body>
