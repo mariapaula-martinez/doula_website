@@ -801,7 +801,6 @@
             }
         }
         
-        // Add "About" section that was missing in the template
         document.addEventListener('DOMContentLoaded', function() {
             // Make sure all links work with smooth scrolling
             const allLinks = document.querySelectorAll('a[href^="#"]');
@@ -815,94 +814,141 @@
                     }
                 });
             });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create a container for mobile navigation
-            const mobileNavContainer = document.createElement('div');
-            mobileNavContainer.className = 'mobile-nav-container';
-            mobileNavContainer.style.display = 'none';
-            mobileNavContainer.style.backgroundColor = 'rgb(124, 81, 137)'; // Match exact color
-            mobileNavContainer.style.width = '100%';
-            mobileNavContainer.style.position = 'absolute';
-            mobileNavContainer.style.top = '100%';
-            mobileNavContainer.style.left = '0';
-            mobileNavContainer.style.zIndex = '999';
-            
-            // Create hamburger button
-            const hamburgerBtn = document.createElement('button');
-            hamburgerBtn.innerHTML = '☰';
-            hamburgerBtn.style.background = 'none';
-            hamburgerBtn.style.border = 'none';
-            hamburgerBtn.style.color = 'white';
-            hamburgerBtn.style.fontSize = '24px';
-            hamburgerBtn.style.position = 'absolute';
-            hamburgerBtn.style.right = '20px';
-            hamburgerBtn.style.top = '20px';
-            hamburgerBtn.style.cursor = 'pointer';
-            hamburgerBtn.style.display = 'none';
-            
-            // Get header and navigation
+    
+            // Mobile navigation handling
             const header = document.querySelector('header');
             const nav = document.querySelector('nav');
-            const navClone = nav.cloneNode(true);
+    
+            // First, fix the header's positioning
+            header.style.position = 'fixed';
+            header.style.top = '0';
+            header.style.width = '100%';
+            header.style.zIndex = '1000';
+    
+            // Create mobile menu toggle button
+            const menuToggle = document.createElement('button');
+            menuToggle.className = 'menu-toggle';
+            menuToggle.innerHTML = '☰';
+            menuToggle.style.display = 'none';
+            menuToggle.style.position = 'absolute';
+            menuToggle.style.top = '20px';
+            menuToggle.style.right = '20px';
+            menuToggle.style.color = 'white';
+            menuToggle.style.fontSize = '24px';
+            menuToggle.style.cursor = 'pointer';
+            menuToggle.style.zIndex = '1001';
+            menuToggle.style.background = 'none';
+            menuToggle.style.border = 'none';
             
-            // Add elements to DOM
-            header.style.position = 'relative'; // Ensure positioning context
-            header.appendChild(hamburgerBtn);
-            mobileNavContainer.appendChild(navClone);
-            header.appendChild(mobileNavContainer);
+            // Append toggle button
+            header.appendChild(menuToggle);
             
-            // Handle click events
-            hamburgerBtn.addEventListener('click', function() {
-                if (mobileNavContainer.style.display === 'none') {
-                    mobileNavContainer.style.display = 'block';
-                } else {
-                    mobileNavContainer.style.display = 'none';
-                }
-            });
+            // Create mobile menu
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'mobile-menu';
+            mobileMenu.style.display = 'none';
+            mobileMenu.style.width = '100%';
+            mobileMenu.style.backgroundColor = 'rgb(124, 81, 137)';
+            mobileMenu.style.position = 'absolute';
+            mobileMenu.style.top = '100%';
+            mobileMenu.style.left = '0';
             
-            // Add click handlers to mobile nav links
-            const mobileNavLinks = mobileNavContainer.querySelectorAll('a');
-            mobileNavLinks.forEach(link => {
+            // Clone nav items for mobile menu
+            const mobileNav = nav.cloneNode(true);
+            mobileNav.style.display = 'flex';
+            mobileNav.style.flexDirection = 'column';
+            mobileNav.style.width = '100%';
+            mobileNav.style.padding = '0';
+            mobileNav.style.margin = '0';
+            
+            // Style mobile menu links
+            const mobileLinks = mobileNav.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.style.display = 'block';
+                link.style.width = '100%';
+                link.style.padding = '15px 0';
+                link.style.textAlign = 'center';
+                link.style.borderBottom = '1px solid rgba(255,255,255,0.2)';
+                
+                // Remove separator
+                link.style.position = 'relative';
+                
+                // Remove after pseudo-element
                 link.addEventListener('click', function() {
-                    mobileNavContainer.style.display = 'none';
+                    if (window.innerWidth <= 768) {
+                        mobileMenu.style.display = 'none';
+                    }
                 });
             });
             
-            // Style mobile navigation links
-            const styleLinks = function() {
+            // Append mobile menu
+            mobileMenu.appendChild(mobileNav);
+            header.appendChild(mobileMenu);
+            
+            // Toggle menu on click
+            menuToggle.addEventListener('click', function() {
+                if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
+                    mobileMenu.style.display = 'block';
+                } else {
+                    mobileMenu.style.display = 'none';
+                }
+            });
+            
+            // Handle resize
+            function handleResize() {
                 if (window.innerWidth <= 768) {
-                    hamburgerBtn.style.display = 'block';
                     nav.style.display = 'none';
+                    menuToggle.style.display = 'block';
                     
-                    const links = mobileNavContainer.querySelectorAll('a');
-                    links.forEach(link => {
-                        link.style.display = 'block';
-                        link.style.padding = '15px 20px';
-                        link.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
-                        link.style.width = '100%';
-                        link.style.textAlign = 'center';
-                    });
-                    
-                    // Remove separators in mobile view
-                    const separators = mobileNavContainer.querySelectorAll('a::after');
-                    separators.forEach(sep => {
-                        sep.style.display = 'none';
+                    // Ensure proper link styling in mobile menu
+                    mobileLinks.forEach(link => {
+                        link.style.after = 'none';
                     });
                 } else {
-                    hamburgerBtn.style.display = 'none';
                     nav.style.display = 'flex';
-                    mobileNavContainer.style.display = 'none';
+                    menuToggle.style.display = 'none';
+                    mobileMenu.style.display = 'none';
                 }
-            };
+            }
             
-            // Initial styling
-            styleLinks();
+            // Initial check and resize listener
+            handleResize();
+            window.addEventListener('resize', handleResize);
             
-            // Update on resize
-            window.addEventListener('resize', styleLinks);
+            // Fix for pseudo elements
+            const style = document.createElement('style');
+            style.textContent = `
+                @media (max-width: 768px) {
+                    nav a:not(:last-child)::after {
+                        display: none !important;
+                    }
+                    
+                    .mobile-menu nav {
+                        flex-direction: column;
+                        width: 100%;
+                    }
+                    
+                    .mobile-menu nav a {
+                        display: block;
+                        width: 100%;
+                        padding: 15px 0;
+                        text-align: center;
+                        border-bottom: 1px solid rgba(255,255,255,0.2);
+                    }
+                    
+                    /* Ensure no white space */
+                    header {
+                        padding-bottom: 0 !important;
+                    }
+                    
+                    .mobile-menu {
+                        margin-top: 0 !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
+
 </body>
 </html>
