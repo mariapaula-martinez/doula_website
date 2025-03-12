@@ -429,9 +429,65 @@
         
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .hero-content,
+            /* Header and navigation */
+            header {
+                height: 70px !important;
+                padding: 0 !important;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+            }
+            
+            nav a {
+                padding: 15px 0;
+                margin: 2px 0;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                font-size: 14px;
+            }
+            
+            nav a:not(:last-child)::after {
+                display: none;
+            }
+            
+            /* Banner and hero section */
+            .full-width-banner {
+                margin-top: 70px !important;
+                padding-top: 0 !important;
+                background-color: rgb(124, 81, 137);
+            }
+            
+            .full-width-banner > div {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            #home .section-content > div {
+                flex-direction: column;
+            }
+            
+            #home .section-content > div > div:first-child {
+                padding-right: 20px;
+                height: 300px;
+                margin-bottom: 20px;
+            }
+            
+            /* Content sections */
+            .hero-content, 
             .service-content {
-                padding: 40px 20px;
+                padding: 40px 20px !important;
             }
             
             .service, 
@@ -443,109 +499,39 @@
                 height: 300px;
             }
             
-            nav {
-                flex-wrap: wrap;
-            }
-            
-            nav a {
-                padding: 0 15px;
-                font-size: 14px;
-            }
-
-            /* Add these new styles */
-            header {
-                padding: 20px 0;
-            }
-
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav a {
-                padding: 10px 15px;
-                margin: 2px 0;
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            }
-
-            nav a:not(:last-child)::after {
-                display: none;
-            }
-
-            #home .section-content > div {
-                flex-direction: column;
-            }
-
-            #home .section-content > div > div:first-child {
-                padding-right: 20px;
-                height: 300px;
-                margin-bottom: 20px;
-            }
-
-            .hero-content {
-                padding: 40px 20px !important;
-            }
-
+            /* Icons and buttons */
             .social-icon {
                 width: 40px !important;
                 height: 40px !important;
             }
-
+            
             footer .social-icon {
                 width: 60px !important;
                 height: 60px !important;
             }
-
+            
             footer .social-icon svg {
                 width: 40px;
                 height: 40px;
             }
-
-            .contact-info, .contact-form {
-                padding: 0 15px;
-                margin-bottom: 40px;
-            }
-
+            
             .cta-button {
                 width: 100%;
                 text-align: center;
             }
-
+            
+            /* Contact section */
+            .contact-info, 
+            .contact-form {
+                padding: 0 15px;
+                margin-bottom: 40px;
+            }
+            
             .contact-form .form-group input,
             .contact-form .form-group textarea {
                 font-size: 16px;
                 padding: 12px;
             }
-
-            .full-width-banner {
-                margin-top: 120px;
-            }
-
-            /* Add these styles for better mobile navigation */
-            header {
-                background-color: var(--primary-color) !important;
-            }
-            
-            nav {
-                background-color: var(--primary-color) !important;
-                margin: 0;
-                padding: 0;
-            }
-            
-            nav a {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-                padding: 15px 0;
-                margin: 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .full-width-banner {
-                margin-top: 60px;
-            }
-
         }
     </style>
 </head>
@@ -825,7 +811,7 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            // Make sure all links work with smooth scrolling
+            // Handle smooth scrolling
             const allLinks = document.querySelectorAll('a[href^="#"]');
             allLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -837,54 +823,84 @@
                     }
                 });
             });
-            
-            // Mobile menu implementation
+
+            // Create hamburger button
             const header = document.querySelector('header');
             const nav = document.querySelector('nav');
-            
-            // Create hamburger button with styles applied directly
+
             const hamburger = document.createElement('button');
             hamburger.innerHTML = '☰';
             hamburger.style.background = 'none';
             hamburger.style.border = 'none';
             hamburger.style.color = 'white';
-            hamburger.style.fontSize = '24px';
+            hamburger.style.fontSize = '28px';
             hamburger.style.position = 'absolute';
             hamburger.style.right = '20px';
-            hamburger.style.top = '15px';
+            hamburger.style.top = '50%';
+            hamburger.style.transform = 'translateY(-50%)'; // Center vertically
             hamburger.style.cursor = 'pointer';
-            hamburger.style.display = 'none';
             hamburger.style.zIndex = '1001';
-            
+            hamburger.style.display = 'none';
+
+            // Add hamburger to header
             header.appendChild(hamburger);
-            
-            // Initial check and event listener for window size
-            function checkWindowSize() {
+
+            // Fix banner spacing
+            const banner = document.querySelector('.full-width-banner');
+            if (banner) {
+                // Remove any inline styles causing gaps
+                banner.style.paddingTop = '0';
+            }
+
+            // Handle window sizing
+            function handleResize() {
                 if (window.innerWidth <= 768) {
-                    nav.style.display = 'none';
+                    // Mobile view
                     hamburger.style.display = 'block';
+                    nav.style.display = 'none';
+
+                    // Fix header height
+                    header.style.height = '70px';
+
+                    // Fix banner positioning
+                    if (banner) {
+                        banner.style.marginTop = '70px';
+                        banner.style.paddingTop = '0';
+                    }
                 } else {
-                    nav.style.display = 'flex';
+                    // Desktop view
                     hamburger.style.display = 'none';
+                    nav.style.display = 'flex';
+
+                    // Restore header height
+                    header.style.height = 'auto';
+
+                    // Adjust banner for desktop
+                    if (banner) {
+                        banner.style.marginTop = header.offsetHeight + 'px';
+                    }
                 }
             }
-            
-            // Handle hamburger click
+
+            // Toggle navigation
             hamburger.addEventListener('click', function() {
                 if (nav.style.display === 'none' || nav.style.display === '') {
                     nav.style.display = 'flex';
                     nav.style.flexDirection = 'column';
                     nav.style.position = 'absolute';
-                    nav.style.width = '100%';
+                    nav.style.top = '70px'; // Match header height
                     nav.style.left = '0';
-                    nav.style.top = '100%';
+                    nav.style.width = '100%';
                     nav.style.backgroundColor = 'rgb(124, 81, 137)';
+                    nav.style.zIndex = '1000';
+                    nav.style.paddingTop = '0';
+                    nav.style.margin = '0';
                 } else {
                     nav.style.display = 'none';
                 }
             });
-            
-            // Hide mobile menu when clicking a link
+
+            // Handle navigation link clicks
             nav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', function() {
                     if (window.innerWidth <= 768) {
@@ -892,17 +908,11 @@
                     }
                 });
             });
-            
-            // Initial check and resize listener
-            checkWindowSize();
-            window.addEventListener('resize', checkWindowSize);
-            
-            // Fix banner top margin for fixed header
-            const banner = document.querySelector('.full-width-banner');
-            if (banner) {
-                banner.style.marginTop = header.offsetHeight + 'px';
-            }
-        });
+
+            // Initialize and add resize listener
+            handleResize();
+            window.addEventListener('resize', handleResize);
+        }); 
     </script>
 
 </body>
