@@ -737,27 +737,29 @@
             </div>
             
             <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Nombre *</label>
-                    <input type="text" id="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Teléfono *</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Correo electrónico *</label>
-                    <input type="email" id="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Mensaje *</label>
-                    <textarea id="message" required></textarea>
-                </div>
-                
-                <button type="submit" class="cta-button">Enviar</button>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre *</label>
+                        <input type="text" id="name" name="user_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono *</label>
+                        <input type="tel" id="phone" name="user_phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico *</label>
+                        <input type="email" id="email" name="user_email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cta-button">Enviar</button>
+                </form>
             </div>
         </div>
 
@@ -912,7 +914,78 @@
             // Initialize and add resize listener
             handleResize();
             window.addEventListener('resize', handleResize);
-        }); 
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the form element
+            const form = document.getElementById('contact-form');
+
+            // Add submit event listener
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Show loading state
+                const button = form.querySelector('button[type="submit"]');
+                const originalText = button.textContent;
+                button.textContent = 'Enviando...';
+                button.disabled = true;
+
+                // Send the form data to EmailJS
+                emailjs.sendForm(
+                    'service_ztj0gsf', // Replace with your service ID
+                    'template_at6ni5e', // Replace with your template ID
+                    this
+                )
+                .then(function() {
+                    // Success message
+                    button.textContent = '¡Enviado!';
+
+                    // Show success message to user
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.textContent = '¡Gracias por tu mensaje! Te contactaré pronto.';
+                    successMessage.style.color = 'green';
+                    successMessage.style.marginTop = '20px';
+                    form.appendChild(successMessage);
+
+                    // Reset form
+                    form.reset();
+
+                    // Reset button after 3 seconds
+                    setTimeout(function() {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 3000);
+                }, function(error) {
+                    // Error handling
+                    console.error('Error sending email:', error);
+
+                    // Show error message
+                    button.textContent = 'Error';
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'error-message';
+                    errorMessage.textContent = 'Hubo un problema al enviar tu mensaje. Por favor intenta de nuevo.';
+                    errorMessage.style.color = 'red';
+                    errorMessage.style.marginTop = '20px';
+                    form.appendChild(errorMessage);
+
+                    // Reset button after 3 seconds
+                    setTimeout(function() {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 3000);
+                });
+            });
+        });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+      (function() {
+        // Replace "your_user_id" with your actual EmailJS user ID  --> Account/Public Key
+        emailjs.init("kkiRkSXybtep-mZ-C");
+      })();
     </script>
 
 </body>
